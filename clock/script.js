@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const CurrentHour = new Date().getHours();
       const CurrentMinutes = new Date().getMinutes();
       const period = CurrentHour >= 12 ? 'PM' : 'AM';
+      const audio = new Audio('stop.mp3');
 
       document.getElementById("time").innerText = CurrentHour + ':' + (CurrentMinutes < 10 ? '0' : '') + CurrentMinutes;
       document.getElementById("period").innerText = currentSecond
@@ -40,6 +41,8 @@ document.addEventListener("DOMContentLoaded", function() {
       var year = new Date().getFullYear();
 
       document.getElementById("date").innerText = dayOfWeek + "-" + month + "-" + year
+
+      audio.play();
 
       lines.forEach((line, index) => {
         line.classList.toggle('active', index < currentSecond);
