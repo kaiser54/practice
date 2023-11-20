@@ -35,7 +35,7 @@ body {
     color: white;
 }
 
-.time span {
+.time .time-period {
     font-size: 12px;
     margin-left: 5px;
 }
@@ -43,10 +43,11 @@ body {
 .timer .period {
     color: var(--White, #FFF);
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    text-transform: uppercase;
 }
 
 .clock-face,
