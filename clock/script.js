@@ -24,8 +24,23 @@ document.addEventListener("DOMContentLoaded", function() {
     // Update lines color based on seconds
     setInterval(() => {
       const lines = document.querySelectorAll('.hour-line');
+
       const currentSecond = new Date().getSeconds();
-  
+      const CurrentHour = new Date().getHours();
+      const CurrentMinutes = new Date().getMinutes();
+      const period = CurrentHour >= 12 ? 'PM' : 'AM';
+
+      document.getElementById("time").innerText = CurrentHour + ':' + (CurrentMinutes < 10 ? '0' : '') + CurrentMinutes;
+      document.getElementById("period").innerText = currentSecond
+      document.getElementById("moment").innerText = period
+
+      var dayOfWeek = new Date().toLocaleString('en', { weekday: 'short' });
+      var month = new Date().toLocaleString('en', { month: 'short' });
+      var day = new Date().getDate();
+      var year = new Date().getFullYear();
+
+      document.getElementById("date").innerText = dayOfWeek + "-" + month + "-" + year
+
       lines.forEach((line, index) => {
         line.classList.toggle('active', index < currentSecond);
       });
