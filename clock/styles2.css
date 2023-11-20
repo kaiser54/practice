@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+
+body {
+    font-family: 'DM Mono', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #131517;
+}
+
+.timer {
+    aspect-ratio: 1;
+    position: absolute;
+    background-color: #131517;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 111;
+    width: 90%;
+    border-radius: 100%;
+    transform: translate(10px, 10px);
+}
+
+.timer .time {
+    text-align: center;
+    font-family: DM Mono;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: white;
+}
+
+.time span {
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.timer .period {
+    color: var(--White, #FFF);
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.clock-face,
+.wrapper {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    /* border: 2px solid #333; */
+    border-radius: 50%;
+}
+
+.icon {
+    position: absolute;
+    z-index: 22222;
+    top: 92%;
+    width: 100%;
+    fill: var(--sub-001, #24292E);
+    transition: all 0.5s ease-in-out;
+}
+
+.icon path {
+    transform-origin: center center;
+    animation: pulsing 1s infinite;
+}
+
+/* .clock-face::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 100px;
+    background-color: #333;
+    transform: translate(-50%, -100%);
+    border-radius: 5px;
+  } */
+
+.hour-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1px;
+    height: 100px;
+    background-color: var(--sub-001, #24292E);
+    transform-origin: bottom center;
+    transform: translate(-50%, -100%) rotate(0deg);
+    transition: all 0.5s ease-in-out;
+}
+
+.hour-line.active {
+    background-color: white;
+}
+
+@keyframes pulsing {
+    0% {
+        transform: scale(.8);
+        opacity: 0.1;
+    }
+
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(.8);
+        opacity: 0.1;
+    }
+}
