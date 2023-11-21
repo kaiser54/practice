@@ -23,9 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
   playButton.addEventListener("click", playBeep);
   pauseButton.addEventListener("click", pauseBeep);
 
-  // Play the sound by default
-  playBeep();
-
   function playBeep() {
     audio = new Audio(beepSound);
     audio.play();
@@ -49,6 +46,10 @@ document.addEventListener("DOMContentLoaded", function () {
       playButton.style.display = "flex";
     }
   }
+
+  
+  // Play the sound by default
+  playBeep();
 
   setInterval(() => {
     const lines = document.querySelectorAll(".hour-line");
