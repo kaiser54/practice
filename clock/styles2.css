@@ -12,7 +12,7 @@ body {
 
 .btn {
     position: absolute;
-    top: 40px;
+    bottom: 40px;
 }
 
 .material-symbols-outlined {
@@ -49,6 +49,20 @@ body {
 .time .time-period {
     font-size: 12px;
     margin-left: 5px;
+}
+.sound-btn {
+    cursor: pointer;
+    font-family: DM Mono;
+    text-transform: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 6px;
+    color: white;
+    padding: 2px 5px;
+    background-color: #24292E;
+    border-radius: 4px;
 }
 
 .timer .period {

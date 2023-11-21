@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   
   // Play the sound by default
-  playBeep();
+  // playBeep();
 
   setInterval(() => {
     const lines = document.querySelectorAll(".hour-line");
