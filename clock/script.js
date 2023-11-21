@@ -1,52 +1,72 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Get the clock face element
-    const clockFace = document.getElementById("clockFace");
-  
-    // Define the number of seconds on the clock
-    const numSeconds = 60;
-  
-    // Generate and append lines dynamically
-    for (let i = 1; i <= numSeconds; i++) {
-      // Create a line element
-      const line = document.createElement("div");
-      line.className = "hour-line";
-  
-      // Calculate the rotation angle for each line
-      const angle = (i - 1) * (360 / numSeconds);
-  
-      // Apply rotation to the line
-      line.style.transform = `translate(-50%, -100%) rotate(${angle}deg)`;
-  
-      // Append the line to the clock face
-      clockFace.appendChild(line);
-    }
-  
-    // Update lines color based on seconds
-    setInterval(() => {
-      const lines = document.querySelectorAll('.hour-line');
+document.addEventListener("DOMContentLoaded", function () {
+  const clockFace = document.getElementById("clockFace");
+  const playButton = document.getElementById("playButton");
+  const pauseButton = document.getElementById("pauseButton");
 
-      const currentSecond = new Date().getSeconds();
-      const CurrentHour = new Date().getHours();
-      const CurrentMinutes = new Date().getMinutes();
-      const period = CurrentHour >= 12 ? 'PM' : 'AM';
-      const audio = new Audio('stop.mp3');
+  const numSeconds = 60;
+  const beepSound = "stop.mp3";
 
-      document.getElementById("time").innerText = CurrentHour + ':' + (CurrentMinutes < 10 ? '0' : '') + CurrentMinutes;
-      document.getElementById("period").innerText = currentSecond
-      document.getElementById("moment").innerText = period
+  let audio;
 
-      var dayOfWeek = new Date().toLocaleString('en', { weekday: 'short' });
-      var month = new Date().toLocaleString('en', { month: 'short' });
-      var day = new Date().getDate();
-      var year = new Date().getFullYear();
+  // Generate and append lines dynamically
+  for (let i = 1; i <= numSeconds; i++) {
+    const line = document.createElement("div");
+    line.className = "hour-line";
+    const angle = (i - 1) * (360 / numSeconds);
+    line.style.transform = `translate(-50%, -100%) rotate(${angle}deg)`;
+    clockFace.appendChild(line);
+  }
 
-      document.getElementById("date").innerText = dayOfWeek + "-" + month + "-" + year
+  // Event listeners for play and pause buttons
+  playButton.addEventListener("click", playBeep);
+  pauseButton.addEventListener("click", pauseBeep);
 
+  // Play the sound by default
+  playBeep();
+
+  function playBeep() {
+    audio = new Audio(beepSound);
+    audio.play();
+    playButton.style.display = "none";
+    pauseButton.style.display = "flex";
+
+    // Set up an interval to play the sound every second
+    audioInterval = setInterval(() => {
       audio.play();
-
-      lines.forEach((line, index) => {
-        line.classList.toggle('active', index < currentSecond);
-      });
     }, 1000);
-  });
-  
+  }
+
+  function pauseBeep() {
+    if (audio) {
+      audio.pause();
+      clearInterval(audioInterval);
+      pauseButton.style.display = "none";
+      playButton.style.display = "flex";
+    }
+  }
+
+  setInterval(() => {
+    const lines = document.querySelectorAll(".hour-line");
+    const currentSecond = new Date().getSeconds();
+    const currentHour = new Date().getHours();
+    const currentMinutes = new Date().getMinutes();
+    const period = currentHour >= 12 ? "PM" : "AM";
+
+    document.getElementById("time").innerText =
+      currentHour + ":" + (currentMinutes < 10 ? "0" : "") + currentMinutes;
+    document.getElementById("period").innerText = currentSecond;
+    document.getElementById("moment").innerText = period;
+
+    const dayOfWeek = new Date().toLocaleString("en", { weekday: "short" });
+    const month = new Date().toLocaleString("en", { month: "short" });
+    const day = new Date().getDate();
+    const year = new Date().getFullYear();
+
+    document.getElementById("date").innerText =
+      dayOfWeek + "-" + month + "-" + year;
+
+    lines.forEach((line, index) => {
+      line.classList.toggle("active", index < currentSecond);
+    });
+  }, 1000);
+});
