@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notification Clock</title>
+</head>
+<body>
+
+<!-- Display the clock -->
+<div id="clock"></div>
+
+<script>
+function updateClock() {
+  // Get the current time
+  const now = new Date();
+
+  // Format the time as HH:MM:SS
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const seconds = now.getSeconds().toString().padStart(2, '0');
+
+  // Update the clock display
+  const clockDisplay = document.getElementById('clock');
+  clockDisplay.textContent = `${hours}:${minutes}:${seconds}`;
+
+  // Trigger notification and vibration
+//   notifyUser();
+}
+
+function notifyUser() {
+  // Check if the browser supports notifications
+  if ('Notification' in window) {
+    // Request permission to show notifications
+    // Notification.requestPermission().then((permission) => {
+    //   if (permission === 'granted') {
+    //     // Create and show a notification
+    //     const notification = new Notification('Time Update', {
+    //       body: 'One second has passed!',
+    //     });
+
+    //     // Trigger vibration if supported
+    //     if (navigator.vibrate) {
+    //       navigator.vibrate(200); // Vibrate for 200 milliseconds
+    //     }
+    //   }
+    // });
+  }
+}
+
+// Update the clock every second
+setInterval(updateClock, 1000);
+
+// Initial update
+updateClock();
+</script>
+
+</body>
+</html>

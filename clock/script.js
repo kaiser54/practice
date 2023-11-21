@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const beepSound = "stop.mp3";
 
   let audio;
+  let audioInterval;
+  let lastSecond = -1;
 
   // Generate and append lines dynamically
   for (let i = 1; i <= numSeconds; i++) {
@@ -30,9 +32,12 @@ document.addEventListener("DOMContentLoaded", function () {
     playButton.style.display = "none";
     pauseButton.style.display = "flex";
 
-    // Set up an interval to play the sound every second
-    audioInterval = setInterval(() => {
-      audio.play();
+    audioInterval = setInterval(function () {
+      var currentSecond = new Date().getSeconds();
+      if (currentSecond !== lastSecond) {
+        audio.play();
+        lastSecond = currentSecond;
+      }
     }, 1000);
   }
 
@@ -66,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
       dayOfWeek + "-" + month + "-" + year;
 
     lines.forEach((line, index) => {
-      line.classList.toggle("active", index < currentSecond);
+      line.classList.toggle("active", index <= currentSecond);
     });
   }, 1000);
 });
