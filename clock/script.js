@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
       dayOfWeek + "-" + month + "-" + year;
 
     lines.forEach((line, index) => {
-      line.classList.toggle("active", index <= currentSecond);
+      line.classList.toggle("active", index < currentSecond);
     });
   }, 1000);
 });
