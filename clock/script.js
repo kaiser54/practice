@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const numSeconds = 60;
   const beepSound = "stop.mp3";
+  const firstSound = "final.mp3";
 
   let audio;
   let audioInterval;
@@ -29,6 +30,12 @@ document.addEventListener("DOMContentLoaded", function () {
   function playBeep() {
     audio = new Audio(beepSound);
     audio.play();
+    var currentSecond = new Date().getSeconds();
+    if (currentSecond === 1 || currentSecond === 59 || currentSecond === 0) {
+      firstSound = new Audio(firstSound);
+      firstSound.play()
+    }
+
     playButton.style.display = "none";
     pauseButton.style.display = "flex";
 
